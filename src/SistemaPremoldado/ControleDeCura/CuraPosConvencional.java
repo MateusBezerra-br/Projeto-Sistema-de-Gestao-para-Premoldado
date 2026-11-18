@@ -13,6 +13,8 @@ public class CuraPosConvencional extends LoteEmCura{
         super(id, quantidade, dataIncioDeCura, dataFinalizacaoDeCuraPrevista);
 
         this.dataDeDesmoldePrevisto = dataDeDesmoldePrevisto;
+        this.dataDeDesmolde = dataDeDesmolde;
+
     }
 
 
