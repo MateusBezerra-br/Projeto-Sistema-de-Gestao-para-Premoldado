@@ -8,6 +8,7 @@ public class ControleDeProducaoEmCura extends lista<LoteEmCura> {
 
     private static ControleDeProducaoEmCura instancia;
 
+
     private ControleDeProducaoEmCura() {
 
     }

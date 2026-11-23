@@ -4,13 +4,12 @@ public class ItemMolde {
 
     private Molde molde;
     private int  quantidadeTotal;
-    private int quantidadeDisponivel;
+    private int quantidadeDisponivel = 0;
     private int quantidadeEmUso = 0;
 
-    public ItemMolde(Molde molde, int quantidadeTotal, int quantidadeDisponivel) {
+    public ItemMolde(Molde molde, int quantidadeTotal) {
         this.molde = molde;
         this.quantidadeTotal = quantidadeTotal;
-        this.quantidadeDisponivel = quantidadeDisponivel;
 
     }
 
@@ -22,27 +21,44 @@ public class ItemMolde {
         this.molde = molde;
     }
 
-    public int getQuantidadeDisponivel() {
-        return quantidadeDisponivel;
+    public void setQuantidadeTotal(int quantidadeTotal) {
+        this.quantidadeTotal = quantidadeTotal;
     }
 
-    public void setQuantidadeDisponivel(int quantidadeDisponivel) {
-        this.quantidadeDisponivel = quantidadeDisponivel;
+    public int getQuantidadeDisponivel() {
+        return quantidadeDisponivel;
     }
 
     public int getQuantidadeEmUso() {
         return quantidadeEmUso;
     }
 
-    public void setQuantidadeEmUso(int quantidadeEmUso) {
-        this.quantidadeEmUso = quantidadeEmUso;
-    }
-
     public int getQuantidadeTotal() {
         return quantidadeTotal;
     }
 
-    public void setQuantidadeTotal(int quantidadeTotal) {
-        this.quantidadeTotal = quantidadeTotal;
+    public void ocuparMoldes( int quantidadeOcupar){
+
+        if(quantidadeTotal ==  (quantidadeEmUso + quantidadeOcupar) + (quantidadeDisponivel - quantidadeEmUso) ){
+
+            quantidadeEmUso += quantidadeOcupar;
+            quantidadeDisponivel -= quantidadeOcupar;
+
+        }
+
     }
+
+    public  void desocuparMoldes(int quantidadeDesocupar){
+
+
+        if(quantidadeTotal ==  (quantidadeDisponivel + quantidadeDesocupar) + (quantidadeEmUso - quantidadeDesocupar) ){
+
+            quantidadeDisponivel += quantidadeDesocupar;
+            quantidadeEmUso -= quantidadeDesocupar;
+
+        }
+
+    }
+
+
 }

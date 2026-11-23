@@ -1,18 +1,20 @@
 package SistemaPremoldado.EstoqueDeMoldes;
 
+import SistemaPremoldado.GestaoDePedidos.Cliente;
+
 import java.util.Objects;
 
 public class Molde {
 
     private int id;
     private String nome;
-    private Enum tipoDeMolde;
+    private TipoDeMolde tipoDeMolde;
     private int capacidade;
 
 
 
 
-    public Molde(int id, String nome, Enum tipoDeMolde, int capacidade) {
+    public Molde(int id, String nome, TipoDeMolde tipoDeMolde, int capacidade) {
         this.id = id;
         this.nome = nome;
         this.tipoDeMolde = tipoDeMolde;
@@ -23,6 +25,10 @@ public class Molde {
 
         this.capacidade = capacidade ;
 
+    }
+
+    public TipoDeMolde getTipoDeMolde() {
+        return tipoDeMolde;
     }
 
     public int getId() {
@@ -46,10 +52,10 @@ public class Molde {
     }
 
 
-    public enum getTipoDeMolde{
+    public enum TipoDeMolde{
 
         moldeParaVibroCompressao,
-        moldeDesmontavel,
+        moldeDesemissecoManual,
         moldeFixo
 
     }

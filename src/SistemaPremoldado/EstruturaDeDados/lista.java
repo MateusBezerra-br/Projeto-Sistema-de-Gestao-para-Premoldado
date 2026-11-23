@@ -2,10 +2,10 @@ package SistemaPremoldado.EstruturaDeDados;
 import java.util.Collection;
 public class lista<T>  {
 
-    protected Node<T> begin;
-    protected Node<T> end;
+    private Node<T> begin;
+    private Node<T> end;
 
-    protected void addData(T data) {
+    public void addData(T data) {
 
         Node<T> novo = new Node<T>();
         novo.data = data;
@@ -29,7 +29,11 @@ public class lista<T>  {
 
     }
 
-    protected void addBefore(Node<T> ref, T data) {
+    public Node<T> getBegin() {
+        return begin;
+    }
+
+    public void addBefore(Node<T> ref, T data) {
 
         Node<T> novo = new Node<T>();
         novo.data = data;
@@ -49,7 +53,7 @@ public class lista<T>  {
         return this.begin == null;
     }
 
-    protected Node<T> procurarNode(int index) {
+    public Node<T> procurarNode(int index) {
 
         Node<T> aux = this.begin;
         int contador = 0;
@@ -74,11 +78,11 @@ public class lista<T>  {
 
     }
 
-    protected Object procurarData(int index) {
+    public Object procurarData(int index) {
         return procurarNode(index).data;
     }
 
-    protected void removeData(int index) {
+    public void removeData(int index) {
 
         if (this.isEmpty()) {
             return;
@@ -114,7 +118,7 @@ public class lista<T>  {
 
     }
 
-    protected int retornarTamanho() {
+    public int retornarTamanho() {
 
         Node<T> aux = this.begin;
         int tamanho = 0;
