@@ -5,7 +5,7 @@ public class lista<T>  {
     protected Node<T> begin;
     protected Node<T> end;
 
-    protected void addData(T data) {
+    public void addData(T data) {
 
         Node<T> novo = new Node<T>();
         novo.data = data;
@@ -74,11 +74,11 @@ public class lista<T>  {
 
     }
 
-    protected Object procurarData(int index) {
+    public Object procurarData(int index) {
         return procurarNode(index).data;
     }
 
-    protected void removeData(int index) {
+    public void removeData(int index) {
 
         if (this.isEmpty()) {
             return;
@@ -114,7 +114,7 @@ public class lista<T>  {
 
     }
 
-    protected int retornarTamanho() {
+    public int retornarTamanho() {
 
         Node<T> aux = this.begin;
         int tamanho = 0;
