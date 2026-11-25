@@ -1,11 +1,10 @@
 package SistemaPremoldado.ControleDeProducao;
 
-import SistemaPremoldado.EstoqueDeMoldes.EstoqueMolde;
-import SistemaPremoldado.EstruturaDeDados.lista;
+import SistemaPremoldado.EstruturaDeDados.Lista;
 
-public class ControleLoteDeProducao extends lista<LoteDeProducao> {
+public class ControleLoteDeProducao extends Lista<LoteDeProducao> {
 
-    lista<ItemProducao> itensProducao =  new lista<>();
+    Lista<ItemProducao> itensProducao =  new Lista<>();
 
     private static ControleLoteDeProducao instancia;
 

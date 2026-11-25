@@ -1,10 +1,8 @@
 package SistemaPremoldado.ControleDeCura;
 
-import SistemaPremoldado.EstoqueDeMoldes.EstoqueMolde;
+import SistemaPremoldado.EstruturaDeDados.Lista;
 
-import SistemaPremoldado.EstruturaDeDados.lista;
-
-public class ControleDeProducaoEmCura extends lista<LoteEmCura> {
+public class ControleDeProducaoEmCura extends Lista<LoteEmCura> {
 
     private static ControleDeProducaoEmCura instancia;
 

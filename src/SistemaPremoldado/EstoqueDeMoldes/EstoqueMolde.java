@@ -1,9 +1,9 @@
 package SistemaPremoldado.EstoqueDeMoldes;
 
 import SistemaPremoldado.EstruturaDeDados.Node;
-import SistemaPremoldado.EstruturaDeDados.lista;
+import SistemaPremoldado.EstruturaDeDados.Lista;
 
-public class EstoqueMolde extends lista<ItemMolde>{
+public class EstoqueMolde extends Lista<ItemMolde> {
 
     private static EstoqueMolde instancia;
 
