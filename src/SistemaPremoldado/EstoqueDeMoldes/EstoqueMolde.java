@@ -3,34 +3,17 @@ package SistemaPremoldado.EstoqueDeMoldes;
 import SistemaPremoldado.EstruturaDeDados.Node;
 import SistemaPremoldado.EstruturaDeDados.lista;
 
+
 public class EstoqueMolde extends lista<ItemMolde>{
 
-    private static EstoqueMolde instancia;
+
+    public void cadastrarMolde (Molde Molde, int quantidadeTotal ) {
 
 
-
-    private EstoqueMolde() {
-
-    }
-
-    public static EstoqueMolde getInstancia() {
-
-        if(instancia == null) {
-
-            instancia = new EstoqueMolde();
-        }
-
-        return instancia;
-    }
+        if(!moldeExiste(Molde)) {
 
 
-
-
-    public void cadastrarMolde (ItemMolde itemMolde) {
-
-        if(!moldeJaExiste(itemMolde)) {
-
-            addData(itemMolde);
+            addData(new ItemMolde(Molde, quantidadeTotal));
         }
         else{
             System.out.println("Ja existe molde com essas caracteristicas e nome cadastrado");
@@ -38,34 +21,85 @@ public class EstoqueMolde extends lista<ItemMolde>{
 
     }
 
-    public Boolean moldeJaExiste(ItemMolde itemMolde) {
+    public void descadastrarMolde (Molde molde) {
 
-        Node aux = this.begin;
+
+        Node<ItemMolde> aux = getBegin();
 
         for(int i = 0; i  < retornarTamanho(); ){
 
-            ItemMolde aux2 = (ItemMolde)aux.data;
+            ItemMolde aux2 = aux.data;
 
 
-            if(aux2.getMolde().getNome().equals(itemMolde.getMolde().getNome()) &&  aux2.getMolde().getCapacidade() == itemMolde.getMolde().getCapacidade() ){
-                return true;
+            if(molde == aux2.getMolde() ){
+                removeData(i);
             }
 
             aux = procurarNode(i);
 
         }
 
-        return false;
-    }
-
-    public void ocuparMoldes(){
-
-
-
 
     }
 
+    public Boolean moldeExiste(Molde moldeCandidatoCadastro) {
 
+        return !(encontrarMolde(moldeCandidatoCadastro).getMolde() == null);
+    }
+
+    public ItemMolde encontrarMolde(Molde moldeCandidatoCadastro) {
+
+        Node<ItemMolde> aux = getBegin();
+
+        for(int i = 0; i  < retornarTamanho(); ){
+
+            ItemMolde aux2 = aux.data;
+
+
+            if(caracteristicasMoldeIguais(aux2, moldeCandidatoCadastro) ){
+                return aux2;
+            }
+
+            aux = procurarNode(i);
+
+        }
+
+        return null;
+    }
+
+    public boolean caracteristicasMoldeIguais(ItemMolde existente, Molde novo){
+
+        return  existente.getMolde().getNome().equals(novo.getNome()) &&
+                existente.getMolde().getCapacidade() == novo.getCapacidade() &&
+                existente.getMolde().getTipoDeMolde() == novo.getTipoDeMolde() &&
+                existente.getMolde().getProduto().equals(novo.getProduto()) &&
+                existente.getMolde().getTipoDeMolde().equals(novo.getTipoDeMolde());
+
+        }
+
+    public void retirarMoldes(Molde molde, int quantidadeRetirar){
+
+
+        encontrarMolde(molde).retirarMoldes(quantidadeRetirar);
+
+
+    }
+
+    public void devolverMoldes(Molde molde, int quantidadeDevolver){
+
+
+        encontrarMolde(molde).devolverMoldes(quantidadeDevolver);
+
+
+
+    }
+
+    public boolean verificarDisponibilidade(Molde moldeVerificar, int quantidadeSolicitada){
+
+
+      return  encontrarMolde(moldeVerificar).getQuantidadeDisponivel() == quantidadeSolicitada;
+
+    }
 
 
 }
