@@ -18,6 +18,11 @@ public class Venda {
         this.valorTotal = 0.0;
     }
 
+    public void adicionarItemVenda(ItemVenda item) {
+        itensVenda.add(item);
+        atualizarValorTotal();
+    }
+
     public void atualizarValorTotal() {
         valorTotal = 0.0;
 
@@ -27,7 +32,9 @@ public class Venda {
     }
 
     public void atualizarStatusDeVenda() {
-        
+
+        // Regra de atualização de status será definida posteriormente.
+
     }
 
     public String getDataVenda() {
@@ -50,3 +57,4 @@ public class Venda {
         this.statusDeVenda = statusDeVenda;
     }
 }
+
