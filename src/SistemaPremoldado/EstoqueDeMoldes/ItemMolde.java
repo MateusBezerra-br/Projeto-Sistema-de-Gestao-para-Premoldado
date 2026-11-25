@@ -37,7 +37,8 @@ public class ItemMolde {
         return quantidadeTotal;
     }
 
-    public void ocuparMoldes( int quantidadeOcupar){
+
+    public void retirarMoldes( int quantidadeOcupar){
 
         if(quantidadeTotal ==  (quantidadeEmUso + quantidadeOcupar) + (quantidadeDisponivel - quantidadeEmUso) ){
 
@@ -48,7 +49,7 @@ public class ItemMolde {
 
     }
 
-    public  void desocuparMoldes(int quantidadeDesocupar){
+    public  void devolverMoldes(int quantidadeDesocupar){
 
 
         if(quantidadeTotal ==  (quantidadeDisponivel + quantidadeDesocupar) + (quantidadeEmUso - quantidadeDesocupar) ){

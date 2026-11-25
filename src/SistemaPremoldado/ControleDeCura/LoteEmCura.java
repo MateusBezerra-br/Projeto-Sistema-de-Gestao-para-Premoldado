@@ -1,6 +1,7 @@
 package SistemaPremoldado.ControleDeCura;
 
 import SistemaPremoldado.GestaoDePedidos.Cliente;
+import SistemaPremoldado.GestaoDePedidos.Produtos.Produto;
 
 import java.text.DateFormat;
 import java.time.LocalDate;
@@ -8,31 +9,6 @@ import java.util.Date;
 
 public abstract class LoteEmCura {
 
-
-   private int id;
-   private int quantidade;
-   private LocalDate dataIncioDeCura;
-   private LocalDate dataFinalizacaoDeCuraPrevista;
-   private LocalDate dataDeCuraFinalizada;
-   private statusCura statusDeCura;
-   private Boolean curaAtrasada =  Boolean.FALSE;
-
-   public LoteEmCura(int id,int quantidade,LocalDate dataIncioDeCura, LocalDate dataFinalizacaoDeCuraPrevista) {
-
-       this.id = id;
-       this.quantidade = quantidade;
-       this.dataIncioDeCura = dataIncioDeCura;
-       this.dataFinalizacaoDeCuraPrevista = dataFinalizacaoDeCuraPrevista;
-
-   }
-
-   public void atualizarStatusDeCura(statusCura statusDeCura) {
-       this.statusDeCura = statusDeCura;
-   }
-
-   public void setDataDeCuraFinalizada() {
-        this.dataDeCuraFinalizada = LocalDate.now();
-   }
 
     public enum statusCura {
 
@@ -46,7 +22,38 @@ public abstract class LoteEmCura {
 
     }
 
+
+
+    private Produto produto;
+   private int id;
+   private int quantidade;
+   private LocalDate dataIncioDeCura;
+   private LocalDate dataFinalizacaoDeCuraPrevista;
+   private LocalDate dataDeCuraFinalizada;
+   private statusCura statusDeCura;
+   private Boolean curaAtrasada =  Boolean.FALSE;
+
+   public LoteEmCura(Produto produto, int quantidade) {
+
+       this.produto = produto;
+       this.id = id;
+       this.quantidade = quantidade;
+       this.dataIncioDeCura = LocalDate.now();
+       this.dataFinalizacaoDeCuraPrevista = LocalDate.now().plusDays(produto.getTempoCura());
+
+   }
+
     public abstract boolean statusPermitido(statusCura status);
+
+   public void atualizarStatusDeCura(statusCura statusDeCura) {
+       this.statusDeCura = statusDeCura;
+   }
+
+   public void setDataDeCuraFinalizada() {
+        this.dataDeCuraFinalizada = LocalDate.now();
+   }
+
+
 
     public void alterarStatus(statusCura novoStatus) {
 
@@ -59,8 +66,21 @@ public abstract class LoteEmCura {
         atualizarStatusDeCura(novoStatus);
     }
 
+    public Produto getProduto() {
+        return produto;
+    }
 
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
 
+    public statusCura getStatusDeCura() {
+        return statusDeCura;
+    }
+
+    public void setStatusDeCura(statusCura statusDeCura) {
+        this.statusDeCura = statusDeCura;
+    }
 
 
 }

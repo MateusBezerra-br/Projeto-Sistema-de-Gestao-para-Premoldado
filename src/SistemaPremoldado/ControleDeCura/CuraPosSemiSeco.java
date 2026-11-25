@@ -1,15 +1,10 @@
 package SistemaPremoldado.ControleDeCura;
 
+import SistemaPremoldado.GestaoDePedidos.Produtos.Produto;
+
 import java.time.LocalDate;
 
 public class CuraPosSemiSeco extends LoteEmCura {
-
-
-
-    public CuraPosSemiSeco(int id, int quantidade, LocalDate dataIncioDeCura, LocalDate dataFinalizacaoDeCuraPrevista) {
-        super(id, quantidade, dataIncioDeCura, dataFinalizacaoDeCuraPrevista);
-    }
-
 
 
     @Override
@@ -21,6 +16,14 @@ public class CuraPosSemiSeco extends LoteEmCura {
                 status == statusCura.LIBERADO_PARA_ESTOQUE ||
                 status == statusCura.CANCELADO;
     }
+
+    public CuraPosSemiSeco( Produto produto, int quantidade) {
+        super(produto, quantidade);
+    }
+
+
+
+
 
 
 }

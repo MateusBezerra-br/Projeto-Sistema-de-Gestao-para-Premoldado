@@ -118,6 +118,8 @@ public class lista<T>  {
 
     }
 
+
+
     public int retornarTamanho() {
 
         Node<T> aux = this.begin;
