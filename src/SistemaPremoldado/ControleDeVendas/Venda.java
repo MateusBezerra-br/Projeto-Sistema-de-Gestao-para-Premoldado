@@ -1,39 +1,37 @@
 
 package SistemaPremoldado.ControleDeVendas;
 
-import java.util.ArrayList;
-import java.util.List;
+import SistemaPremoldado.EstruturaDeDados.lista;
 
 public class Venda {
 
     private String dataVenda;
-    private List<ItemVenda> itensVenda;
+    private lista<ItemVenda> itensVenda;
     private double valorTotal;
     private String statusDeVenda;
 
     public Venda(String dataVenda, String statusDeVenda) {
         this.dataVenda = dataVenda;
         this.statusDeVenda = statusDeVenda;
-        this.itensVenda = new ArrayList<>();
+        this.itensVenda = new lista<>();
         this.valorTotal = 0.0;
     }
 
     public void adicionarItemVenda(ItemVenda item) {
-        itensVenda.add(item);
+        itensVenda.addData(item);
         atualizarValorTotal();
     }
 
     public void atualizarValorTotal() {
         valorTotal = 0.0;
 
-        for (ItemVenda item : itensVenda) {
+        for (int i = 0; i < itensVenda.retornarTamanho(); i++) {
+            ItemVenda item = (ItemVenda) itensVenda.procurarData(i);
             valorTotal += item.getSubTotal();
         }
     }
 
     public void atualizarStatusDeVenda() {
-
-        // Regra de atualização de status será definida posteriormente.
 
     }
 
@@ -49,7 +47,7 @@ public class Venda {
         return statusDeVenda;
     }
 
-    public List<ItemVenda> getItensVenda() {
+    public lista<ItemVenda> getItensVenda() {
         return itensVenda;
     }
 
@@ -57,4 +55,3 @@ public class Venda {
         this.statusDeVenda = statusDeVenda;
     }
 }
-

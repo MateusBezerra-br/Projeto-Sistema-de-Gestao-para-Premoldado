@@ -1,3 +1,4 @@
+
 package SistemaPremoldado.EstoqueDePremoldados;
 
 public class ItemPremoldado {
@@ -6,12 +7,17 @@ public class ItemPremoldado {
     private int quantidade;
 
     public ItemPremoldado(int id, int quantidade) {
+
+        if (id <= 0 || quantidade < 0) {
+            throw new IllegalArgumentException("ID ou quantidade inválida.");
+        }
+
         this.id = id;
         this.quantidade = quantidade;
     }
 
     public void atualizarQuant() {
-        
+
     }
 
     public int getId() {
@@ -19,6 +25,11 @@ public class ItemPremoldado {
     }
 
     public void setId(int id) {
+
+        if (id <= 0) {
+            throw new IllegalArgumentException("ID inválido.");
+        }
+
         this.id = id;
     }
 
@@ -27,6 +38,11 @@ public class ItemPremoldado {
     }
 
     public void setQuantidade(int quantidade) {
+
+        if (quantidade < 0) {
+            throw new IllegalArgumentException("A quantidade não pode ser negativa.");
+        }
+
         this.quantidade = quantidade;
     }
 }

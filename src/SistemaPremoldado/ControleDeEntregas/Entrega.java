@@ -1,8 +1,7 @@
 
 package SistemaPremoldado.ControleDeEntregas;
 
-import java.util.ArrayList;
-import java.util.List;
+import SistemaPremoldado.EstruturaDeDados.lista;
 import SistemaPremoldado.ControleDeVendas.Venda;
 
 public class Entrega {
@@ -10,7 +9,7 @@ public class Entrega {
     private String nomeEntregador;
     private String statusEntrega;
     private String dataPrevistaEntrega;
-    private List<ItemEntrega> itensEntrega;
+    private lista<ItemEntrega> itensEntrega;
     private Venda venda;
 
     public Entrega(String nomeEntregador, String statusEntrega,
@@ -20,7 +19,7 @@ public class Entrega {
         this.statusEntrega = statusEntrega;
         this.dataPrevistaEntrega = dataPrevistaEntrega;
         this.venda = venda;
-        this.itensEntrega = new ArrayList<>();
+        this.itensEntrega = new lista<>();
     }
 
     public void atualizarStatusEntrega() {
@@ -43,7 +42,7 @@ public class Entrega {
         return dataPrevistaEntrega;
     }
 
-    public List<ItemEntrega> getItensEntrega() {
+    public lista<ItemEntrega> getItensEntrega() {
         return itensEntrega;
     }
 
@@ -62,7 +61,7 @@ public class Entrega {
     public void setDataPrevistaEntrega(String dataPrevistaEntrega) {
         this.dataPrevistaEntrega = dataPrevistaEntrega;
     }
-    
+
     public void setVenda(Venda venda) {
         this.venda = venda;
     }

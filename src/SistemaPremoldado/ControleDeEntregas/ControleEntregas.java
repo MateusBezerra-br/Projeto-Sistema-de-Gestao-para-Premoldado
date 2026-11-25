@@ -1,37 +1,39 @@
+
 package SistemaPremoldado.ControleDeEntregas;
 
-import java.util.ArrayList;
-import java.util.List;
+import SistemaPremoldado.EstruturaDeDados.lista;
 
 public class ControleEntregas {
 
-    private List<Entrega> filaDeEntrega;
+    private lista<Entrega> filaDeEntrega;
 
     public ControleEntregas() {
-        this.filaDeEntrega = new ArrayList<>();
+        this.filaDeEntrega = new lista<>();
     }
 
     public void adicionarNaFila(Entrega entrega) {
-        filaDeEntrega.add(entrega);
+        filaDeEntrega.addData(entrega);
     }
 
     public Entrega proximoDaFila() {
 
-        if (filaDeEntrega.isEmpty()) {
+        if (filaDeEntrega.retornarTamanho() == 0) {
             return null;
         }
 
-        return filaDeEntrega.get(0);
+        return (Entrega) filaDeEntrega.procurarData(0);
     }
 
-    public List<Entrega> listarPorStatus(String status) {
+    public lista<Entrega> listarPorStatus(String status) {
 
-        List<Entrega> entregasEncontradas = new ArrayList<>();
+        lista<Entrega> entregasEncontradas = new lista<>();
 
-        for (Entrega entrega : filaDeEntrega) {
+        for (int i = 0; i < filaDeEntrega.retornarTamanho(); i++) {
+
+            Entrega entrega = (Entrega) filaDeEntrega.procurarData(i);
 
             if (entrega.getStatusEntrega().equalsIgnoreCase(status)) {
-                entregasEncontradas.add(entrega);
+                entregasEncontradas.addData(entrega);
             }
         }
 
@@ -39,14 +41,23 @@ public class ControleEntregas {
     }
 
     public void removerDaFila(Entrega entrega) {
-        filaDeEntrega.remove(entrega);
+
+        for (int i = 0; i < filaDeEntrega.retornarTamanho(); i++) {
+
+            Entrega atual = (Entrega) filaDeEntrega.procurarData(i);
+
+            if (atual == entrega) {
+                filaDeEntrega.removeData(i);
+                return;
+            }
+        }
     }
 
     public void criarNovaOrdemEntrega(Entrega entrega) {
         adicionarNaFila(entrega);
     }
 
-    public List<Entrega> getFilaDeEntrega() {
+    public lista<Entrega> getFilaDeEntrega() {
         return filaDeEntrega;
     }
 }

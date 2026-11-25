@@ -1,15 +1,27 @@
 
 package SistemaPremoldado.ControleDeVendas;
 
+import SistemaPremoldado.EstoqueDePremoldados.EstoquePremoldado;
+import SistemaPremoldado.ControleDePedidosProduzidos.ItemProduzido;
+
 public class ItemVenda {
 
     private int quantidade;
     private double precoUnitario;
     private double subTotal;
 
-    public ItemVenda(int quantidade, double precoUnitario) {
+    private EstoquePremoldado estoquePremoldado;
+    private ItemProduzido itemProduzido;
+
+    public ItemVenda(int quantidade, double precoUnitario,
+                     EstoquePremoldado estoquePremoldado,
+                     ItemProduzido itemProduzido) {
+
         this.quantidade = quantidade;
         this.precoUnitario = precoUnitario;
+        this.estoquePremoldado = estoquePremoldado;
+        this.itemProduzido = itemProduzido;
+
         calcularSubTotal();
     }
 
@@ -41,5 +53,13 @@ public class ItemVenda {
 
     public double getSubTotal() {
         return subTotal;
+    }
+
+    public EstoquePremoldado getEstoquePremoldado() {
+        return estoquePremoldado;
+    }
+
+    public ItemProduzido getItemProduzido() {
+        return itemProduzido;
     }
 }
