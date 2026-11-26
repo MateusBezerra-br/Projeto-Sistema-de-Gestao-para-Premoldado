@@ -1,4 +1,3 @@
-
 package SistemaPremoldado.ControleDeEntregas;
 
 import SistemaPremoldado.EstruturaDeDados.lista;
@@ -7,12 +6,12 @@ import SistemaPremoldado.ControleDeVendas.Venda;
 public class Entrega {
 
     private String nomeEntregador;
-    private String statusEntrega;
+    private StatusEntrega statusEntrega;
     private String dataPrevistaEntrega;
     private lista<ItemEntrega> itensEntrega;
     private Venda venda;
 
-    public Entrega(String nomeEntregador, String statusEntrega,
+    public Entrega(String nomeEntregador, StatusEntrega statusEntrega,
                    String dataPrevistaEntrega, Venda venda) {
 
         this.nomeEntregador = nomeEntregador;
@@ -22,8 +21,12 @@ public class Entrega {
         this.itensEntrega = new lista<>();
     }
 
-    public void atualizarStatusEntrega() {
+    public void atualizarStatusEntrega(StatusEntrega novoStatus) {
+        if (novoStatus == null) {
+            throw new IllegalArgumentException("O status não pode ser nulo.");
+        }
 
+        this.statusEntrega = novoStatus;
     }
 
     public void calcularPrevisao() {
@@ -34,7 +37,7 @@ public class Entrega {
         return nomeEntregador;
     }
 
-    public String getStatusEntrega() {
+    public StatusEntrega getStatusEntrega() {
         return statusEntrega;
     }
 
@@ -54,7 +57,7 @@ public class Entrega {
         this.nomeEntregador = nomeEntregador;
     }
 
-    public void setStatusEntrega(String statusEntrega) {
+    public void setStatusEntrega(StatusEntrega statusEntrega) {
         this.statusEntrega = statusEntrega;
     }
 
