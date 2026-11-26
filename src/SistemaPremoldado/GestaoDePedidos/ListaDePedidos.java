@@ -6,10 +6,19 @@ import SistemaPremoldado.EstruturaDeDados.Lista;
 public class ListaDePedidos {
     private Lista<Pedido> listaDePedidos;
     private int indiceAtual;
+    private static ListaDePedidos instancia;
 
-    public ListaDePedidos() {
+    private ListaDePedidos() {
         this.listaDePedidos = new Lista<>();
         this.indiceAtual = 0;
+    }
+
+    public static ListaDePedidos getInstancia() {
+        if (instancia == null) {
+            instancia = new ListaDePedidos();
+        }
+
+        return instancia;
     }
 
     public void adicionarPedido(Pedido pedido) {

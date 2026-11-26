@@ -4,9 +4,18 @@ import SistemaPremoldado.EstruturaDeDados.Lista;
 
 public class EstoqueMateriaPrima {
     private Lista<ItemEstoque> materiaisEstoque;
+    private static EstoqueMateriaPrima instancia;
 
-    public EstoqueMateriaPrima() {
+    private EstoqueMateriaPrima() {
         this.materiaisEstoque = new Lista<>();
+    }
+
+    public static EstoqueMateriaPrima getInstancia() {
+        if (instancia == null) {
+            instancia = new EstoqueMateriaPrima();
+        }
+
+        return instancia;
     }
 
     public Lista<ItemEstoque> getMateriaisEstoque() {
