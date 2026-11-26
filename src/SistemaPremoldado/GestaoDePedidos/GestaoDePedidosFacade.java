@@ -45,8 +45,8 @@ public class GestaoDePedidosFacade {
         listaDePedidos.removerPedido(index);
     }
 
-    public void adicionarItemAoPedido(Pedido pedido, int idItem, int quantidade, Produto produto) {
-        ItemPedido item = new ItemPedido(idItem, quantidade, produto);
+    public void adicionarItemAoPedido(Pedido pedido, int idItem, int quantidade, Produto produto, Cliente cliente) {
+        ItemPedido item = new ItemPedido(idItem, quantidade, produto,  cliente);
 
         pedido.adicionarItem(item);
         pedido.calcularValor();
