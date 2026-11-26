@@ -2,6 +2,7 @@ package SistemaPremoldado.ControleDeCura;
 
 import SistemaPremoldado.ControleDeProducao.LoteDeProducao;
 import SistemaPremoldado.EstoqueDeMoldes.EstoqueMolde;
+import SistemaPremoldado.EstruturaDeDados.Lista;
 
 import SistemaPremoldado.EstruturaDeDados.lista;
 
@@ -28,29 +29,7 @@ public class ControleDeProducaoEmCura extends lista<LoteEmCura> {
 
 
 
-    public void adicionarNovoLoteEmCura(LoteDeProducao loteEtapaCura){
 
-        LoteEmCura novoLoteCura;
-
-        if(loteEtapaCura.getMetodoDeProducao() == LoteDeProducao.metodoProducao.CONVENCIONAL){
-
-            novoLoteCura = new CuraPosConvencional(loteEtapaCura.getProduto(), loteEtapaCura.getQuantidade(),LocalDate.now().plusDays(loteEtapaCura.getProduto().getTempoCura()) , loteEtapaCura.getMoldeOcupado() ,loteEtapaCura.getEstoqueMolde() );
-
-
-
-
-        }
-        else {
-
-
-             novoLoteCura = new CuraPosSemiSeco(loteEtapaCura.getProduto(),loteEtapaCura.getQuantidade());
-
-
-        }
-
-        instancia.addData(novoLoteCura);
-
-    }
 
 
 

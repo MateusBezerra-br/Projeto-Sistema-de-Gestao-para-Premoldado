@@ -21,7 +21,7 @@ public class Produto {
         this.tempoCura = tempoCura;
     }
 
-    public void atualizaPreco(double novoPreco) {
+    public void atualizarPreco(double novoPreco) {
         this.precoUnidade = novoPreco;
     }
 

@@ -1,6 +1,6 @@
 package SistemaPremoldado.GestaoDePedidos;
 
-import SistemaPremoldado.EstruturaDeDados.lista;
+import SistemaPremoldado.EstruturaDeDados.Lista;
 
 public class Pedido {
 
@@ -16,7 +16,7 @@ public class Pedido {
     private String prazoEstimado;
     private String dataTermino;
     private double valorTotal;
-    private lista<ItemPedido> itensPedido;
+    private Lista<ItemPedido> itensPedido;
 
     public Pedido(int id, String status, String dataDeChegada, String prazoEstimado, String dataTermino) {
         this.id = id;
@@ -25,7 +25,7 @@ public class Pedido {
         this.prazoEstimado = prazoEstimado;
         this.dataTermino = dataTermino;
         this.valorTotal = 0.0;
-        this.itensPedido = new lista<>();
+        this.itensPedido = new Lista<>();
     }
 
     public void adicionarItem(ItemPedido item) {
@@ -71,7 +71,7 @@ public class Pedido {
         return valorTotal;
     }
 
-    public lista<ItemPedido> getItensPedido() {
+    public Lista<ItemPedido> getItensPedido() {
         return itensPedido;
     }
 }

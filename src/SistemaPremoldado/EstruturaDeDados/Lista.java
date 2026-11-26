@@ -1,6 +1,6 @@
 package SistemaPremoldado.EstruturaDeDados;
-import java.util.Collection;
-public class lista<T>  {
+
+public class Lista<T>  {
 
     private Node<T> begin;
     private Node<T> end;
