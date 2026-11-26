@@ -1,4 +1,3 @@
-
 package SistemaPremoldado.EstoqueDePremoldados;
 
 public class ItemPremoldado {
@@ -16,8 +15,13 @@ public class ItemPremoldado {
         this.quantidade = quantidade;
     }
 
-    public void atualizarQuant() {
+    public void atualizarQuant(int novaQuantidade) {
 
+        if (novaQuantidade < 0) {
+            throw new IllegalArgumentException("A quantidade não pode ser negativa.");
+        }
+
+        this.quantidade = novaQuantidade;
     }
 
     public int getId() {

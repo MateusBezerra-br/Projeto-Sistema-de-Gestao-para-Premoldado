@@ -1,6 +1,6 @@
 package SistemaPremoldado.ControleDeEntregas;
 
-import SistemaPremoldado.EstruturaDeDados.lista;
+import SistemaPremoldado.EstruturaDeDados.Lista;
 import SistemaPremoldado.ControleDeVendas.Venda;
 
 public class Entrega {
@@ -8,7 +8,7 @@ public class Entrega {
     private String nomeEntregador;
     private StatusEntrega statusEntrega;
     private String dataPrevistaEntrega;
-    private lista<ItemEntrega> itensEntrega;
+    private Lista<ItemEntrega> itensEntrega;
     private Venda venda;
 
     public Entrega(String nomeEntregador, StatusEntrega statusEntrega,
@@ -18,7 +18,7 @@ public class Entrega {
         this.statusEntrega = statusEntrega;
         this.dataPrevistaEntrega = dataPrevistaEntrega;
         this.venda = venda;
-        this.itensEntrega = new lista<>();
+        this.itensEntrega = new Lista<>();
     }
 
     public void atualizarStatusEntrega(StatusEntrega novoStatus) {
@@ -45,7 +45,7 @@ public class Entrega {
         return dataPrevistaEntrega;
     }
 
-    public lista<ItemEntrega> getItensEntrega() {
+    public Lista<ItemEntrega> getItensEntrega() {
         return itensEntrega;
     }
 
