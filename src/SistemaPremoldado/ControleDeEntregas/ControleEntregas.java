@@ -3,36 +3,27 @@ package SistemaPremoldado.ControleDeEntregas;
 
 import SistemaPremoldado.EstruturaDeDados.lista;
 
-public class ControleEntregas {
-
-    private lista<Entrega> filaDeEntrega;
-
-    public ControleEntregas() {
-        this.filaDeEntrega = new lista<>();
-    }
+public class ControleEntregas extends lista<Entrega> {
 
     public void adicionarNaFila(Entrega entrega) {
-        filaDeEntrega.addData(entrega);
+        addData(entrega);
     }
 
     public Entrega proximoDaFila() {
-
-        if (filaDeEntrega.retornarTamanho() == 0) {
+        if (retornarTamanho() == 0) {
             return null;
         }
 
-        return (Entrega) filaDeEntrega.procurarData(0);
+        return (Entrega) procurarData(0);
     }
 
-    public lista<Entrega> listarPorStatus(String status) {
-
+    public lista<Entrega> listarPorStatus(StatusEntrega status) {
         lista<Entrega> entregasEncontradas = new lista<>();
 
-        for (int i = 0; i < filaDeEntrega.retornarTamanho(); i++) {
+        for (int i = 0; i < retornarTamanho(); i++) {
+            Entrega entrega = (Entrega) procurarData(i);
 
-            Entrega entrega = (Entrega) filaDeEntrega.procurarData(i);
-
-            if (entrega.getStatusEntrega().equalsIgnoreCase(status)) {
+            if (entrega.getStatusEntrega() == status) {
                 entregasEncontradas.addData(entrega);
             }
         }
@@ -41,13 +32,11 @@ public class ControleEntregas {
     }
 
     public void removerDaFila(Entrega entrega) {
-
-        for (int i = 0; i < filaDeEntrega.retornarTamanho(); i++) {
-
-            Entrega atual = (Entrega) filaDeEntrega.procurarData(i);
+        for (int i = 0; i < retornarTamanho(); i++) {
+            Entrega atual = (Entrega) procurarData(i);
 
             if (atual == entrega) {
-                filaDeEntrega.removeData(i);
+                removeData(i);
                 return;
             }
         }
@@ -56,8 +45,6 @@ public class ControleEntregas {
     public void criarNovaOrdemEntrega(Entrega entrega) {
         adicionarNaFila(entrega);
     }
-
-    public lista<Entrega> getFilaDeEntrega() {
-        return filaDeEntrega;
-    }
 }
+
+  

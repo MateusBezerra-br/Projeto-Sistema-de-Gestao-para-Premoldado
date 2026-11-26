@@ -2,6 +2,8 @@
 package SistemaPremoldado.ControleDeVendas;
 
 import SistemaPremoldado.EstruturaDeDados.lista;
+import SistemaPremoldado.ControleDeVendas.Pagamento.Pagamento;
+import SistemaPremoldado.ControleDeVendas.Pagamento.EstrategiaPagamento;
 
 public class Venda {
 
@@ -9,6 +11,7 @@ public class Venda {
     private lista<ItemVenda> itensVenda;
     private double valorTotal;
     private String statusDeVenda;
+    private Pagamento pagamento;
 
     public Venda(String dataVenda, String statusDeVenda) {
         this.dataVenda = dataVenda;
@@ -18,6 +21,10 @@ public class Venda {
     }
 
     public void adicionarItemVenda(ItemVenda item) {
+        if (item == null) {
+            throw new IllegalArgumentException("O item não pode ser nulo.");
+        }
+
         itensVenda.addData(item);
         atualizarValorTotal();
     }
@@ -31,8 +38,29 @@ public class Venda {
         }
     }
 
-    public void atualizarStatusDeVenda() {
+    public void atualizarStatusDeVenda(String novoStatus) {
+        if (novoStatus == null || novoStatus.trim().isEmpty()) {
+            throw new IllegalArgumentException("O status da venda é inválido.");
+        }
 
+        this.statusDeVenda = novoStatus;
+    }
+
+    
+    public void configurarPagamento(EstrategiaPagamento estrategia) {
+        this.pagamento = new Pagamento(estrategia);
+    }
+
+    
+    public void realizarPagamento() {
+        if (pagamento == null) {
+            throw new IllegalStateException(
+                "Nenhuma forma de pagamento foi configurada."
+            );
+        }
+
+        atualizarValorTotal();
+        pagamento.realizarPagamento(valorTotal);
     }
 
     public String getDataVenda() {
@@ -52,6 +80,6 @@ public class Venda {
     }
 
     public void setStatusDeVenda(String statusDeVenda) {
-        this.statusDeVenda = statusDeVenda;
+        atualizarStatusDeVenda(statusDeVenda);
     }
 }

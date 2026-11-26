@@ -1,4 +1,3 @@
-
 package SistemaPremoldado.ControleDeVendas;
 
 import SistemaPremoldado.EstoqueDePremoldados.EstoquePremoldado;
@@ -17,6 +16,10 @@ public class ItemVenda {
                      EstoquePremoldado estoquePremoldado,
                      ItemProduzido itemProduzido) {
 
+        if (quantidade <= 0 || precoUnitario < 0) {
+            throw new IllegalArgumentException("Quantidade ou preço inválido.");
+        }
+
         this.quantidade = quantidade;
         this.precoUnitario = precoUnitario;
         this.estoquePremoldado = estoquePremoldado;
@@ -26,6 +29,10 @@ public class ItemVenda {
     }
 
     public void atualizarQuantidade(int quantidade) {
+        if (quantidade <= 0) {
+            throw new IllegalArgumentException("A quantidade deve ser maior que zero.");
+        }
+
         this.quantidade = quantidade;
         calcularSubTotal();
     }
@@ -47,6 +54,10 @@ public class ItemVenda {
     }
 
     public void setPrecoUnitario(double precoUnitario) {
+        if (precoUnitario < 0) {
+            throw new IllegalArgumentException("O preço não pode ser negativo.");
+        }
+
         this.precoUnitario = precoUnitario;
         calcularSubTotal();
     }
@@ -63,3 +74,5 @@ public class ItemVenda {
         return itemProduzido;
     }
 }
+
+  
