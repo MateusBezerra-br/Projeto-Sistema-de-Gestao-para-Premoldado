@@ -3,13 +3,15 @@ package SistemaPremoldado.GestaoDePedidos;
 import SistemaPremoldado.GestaoDePedidos.Produtos.Produto;
 
 public class ItemPedido {
+
+    private Cliente cliente;
     private int id;
     private int quantidade;
     private Produto produto;
     private double precoUnitario;
     private double subtotal;
 
-    public ItemPedido (int id, int quantidade, Produto produto) {
+    public ItemPedido (int id, int quantidade, Produto produto, Cliente cliente) {
         this.id = id;
         this.quantidade = quantidade;
         this.produto = produto;
@@ -46,5 +48,13 @@ public class ItemPedido {
 
     public double getSubtotal() {
         return subtotal;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 }

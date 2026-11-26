@@ -28,22 +28,27 @@ public class ControleDeProducaoEmCura extends lista<LoteEmCura> {
 
 
 
-    public void adicionarNovoLoteEmCura(LoteDeProducao loteEtapaCura, int tempoNoMolde){
+    public void adicionarNovoLoteEmCura(LoteDeProducao loteEtapaCura){
 
+        LoteEmCura novoLoteCura;
 
         if(loteEtapaCura.getMetodoDeProducao() == LoteDeProducao.metodoProducao.CONVENCIONAL){
 
-            CuraPosConvencional novoLoteCura = new CuraPosConvencional(loteEtapaCura.getProduto(), loteEtapaCura.getQuantidade(),LocalDate.now().plusDays(tempoNoMolde) , loteEtapaCura.getMoldeOcupado() ,loteEtapaCura.getEstoqueMolde() );
-
-            instancia.addData(novoLoteCura);
+            novoLoteCura = new CuraPosConvencional(loteEtapaCura.getProduto(), loteEtapaCura.getQuantidade(),LocalDate.now().plusDays(loteEtapaCura.getProduto().getTempoCura()) , loteEtapaCura.getMoldeOcupado() ,loteEtapaCura.getEstoqueMolde() );
 
 
-        }
-        else{
 
 
         }
+        else {
 
+
+             novoLoteCura = new CuraPosSemiSeco(loteEtapaCura.getProduto(),loteEtapaCura.getQuantidade());
+
+
+        }
+
+        instancia.addData(novoLoteCura);
 
     }
 

@@ -1,5 +1,6 @@
 package SistemaPremoldado.ControleDeCura;
 
+import SistemaPremoldado.EstruturaDeDados.lista;
 import SistemaPremoldado.GestaoDePedidos.Cliente;
 import SistemaPremoldado.GestaoDePedidos.Produtos.Produto;
 
@@ -24,6 +25,7 @@ public abstract class LoteEmCura {
 
 
 
+    private lista<Cliente> clientes ;
     private Produto produto;
    private int id;
    private int quantidade;
@@ -82,5 +84,11 @@ public abstract class LoteEmCura {
         this.statusDeCura = statusDeCura;
     }
 
+    public lista<Cliente> getClientes() {
+        return clientes;
+    }
 
+    public void setClientes(lista<Cliente> clientes) {
+        this.clientes = clientes;
+    }
 }

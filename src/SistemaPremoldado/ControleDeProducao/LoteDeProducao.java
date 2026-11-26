@@ -9,6 +9,14 @@ import java.time.LocalDate;
 public class LoteDeProducao {
 
 
+    public statusAtuais getStatusAtual() {
+        return statusAtual;
+    }
+
+    public void setStatusAtual(statusAtuais statusAtual) {
+        this.statusAtual = statusAtual;
+    }
+
     public enum statusAtuais{
 
         AGUARDANDO_INICIIO_PRODUCAO,
@@ -25,6 +33,7 @@ public class LoteDeProducao {
 
     }
 
+    int id;
     private EstoqueMolde estoqueMolde;
     private Molde moldeOcupado;
     private Produto produto;
@@ -35,16 +44,17 @@ public class LoteDeProducao {
     private LocalDate dataPrevisaoIniciarProducao;
     private LocalDate dataInicioProducao;
     private MaquinaVibroCompressora maquinaVibroCompressora;
+    private int producaoParaEstoque ;
 
 
 
-    LoteDeProducao(Produto produto,  int quantidade, metodoProducao metodoDeProducao, LocalDate dataPrevisaoIniciarProducao, Molde moldeOcupado) {
+    LoteDeProducao(Produto produto,  int quantidade, metodoProducao metodoDeProducao, LocalDate dataPrevisaoIniciarProducao,  int producaoParaEstoque) {
         this.produto = produto;
         this.quantidade = quantidade;
         this.metodoDeProducao = metodoDeProducao;
         this.statusAtual = statusAtuais.AGUARDANDO_INICIIO_PRODUCAO;
         this.dataEmissaoDeProducao = LocalDate.now();
-        this.moldeOcupado = moldeOcupado;
+        this.producaoParaEstoque = producaoParaEstoque;
     }
 
     public void setMaquinaVibroCompressora(MaquinaVibroCompressora maquinaVibroCompressora) {
@@ -106,5 +116,10 @@ public class LoteDeProducao {
 
     public void setEstoqueMolde(EstoqueMolde estoqueMolde) {
         this.estoqueMolde = estoqueMolde;
+    }
+
+    @Override
+    public String toString(){
+        return this.id + "" + this.produto  ;
     }
 }

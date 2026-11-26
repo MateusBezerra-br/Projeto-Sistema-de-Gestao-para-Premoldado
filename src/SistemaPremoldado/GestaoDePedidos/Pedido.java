@@ -3,6 +3,13 @@ package SistemaPremoldado.GestaoDePedidos;
 import SistemaPremoldado.EstruturaDeDados.lista;
 
 public class Pedido {
+
+    public enum statusDoPedido{
+        INICIADO,
+        FINALIZADO,
+    }
+
+
     private int id;
     private String status;
     private String dataDeChegada;
