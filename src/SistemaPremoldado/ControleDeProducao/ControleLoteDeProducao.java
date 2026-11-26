@@ -105,6 +105,7 @@ public class ControleLoteDeProducao extends Lista<LoteDeProducao> {
 
 
 
+
         return true;
     }
 
@@ -117,6 +118,7 @@ public class ControleLoteDeProducao extends Lista<LoteDeProducao> {
 
 
     public boolean verificarDisponibilidadeMetodoConvencional(LoteDeProducao loteDeProducao){
+
 
 
 
