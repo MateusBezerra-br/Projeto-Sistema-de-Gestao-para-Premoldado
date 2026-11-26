@@ -5,6 +5,8 @@ import SistemaPremoldado.EstruturaDeDados.Lista;
 
 public class TracoProduto {
     private Lista<ItemTraco> itensReceita;
+
+
     public TracoProduto() {
         this.itensReceita = new Lista<>();
     }
@@ -13,11 +15,11 @@ public class TracoProduto {
         return itensReceita;
     }
 
-    public void adicionarItemReceita(ItemTraco item){
+    public void adicionarItemTraco(ItemTraco item){
         this.itensReceita.addData(item);
     }
 
-    public void removerItemReceita(int index) {
+    public void removerItemTraco(int index) {
         this.itensReceita.removeData(index);
     }
 }

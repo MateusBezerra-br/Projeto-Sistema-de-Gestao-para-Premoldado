@@ -1,13 +1,13 @@
 package SistemaPremoldado.EstoqueDePremoldados;
 
-import SistemaPremoldado.EstruturaDeDados.lista;
+import SistemaPremoldado.EstruturaDeDados.Lista;
 
 public class EstoquePremoldado {
 
-    private lista<ItemPremoldado> itensPremoldados;
+    private Lista<ItemPremoldado> itensPremoldados;
 
     public EstoquePremoldado() {
-        this.itensPremoldados = new lista<>();
+        this.itensPremoldados = new Lista<>();
     }
 
     public void descontarEstoque() {

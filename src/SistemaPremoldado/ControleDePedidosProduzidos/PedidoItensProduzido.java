@@ -1,19 +1,19 @@
 
 package SistemaPremoldado.ControleDePedidosProduzidos;
 
-import SistemaPremoldado.EstruturaDeDados.lista;
+import SistemaPremoldado.EstruturaDeDados.Lista;
 import SistemaPremoldado.GestaoDePedidos.Pedido;
 
 public class PedidoItensProduzido {
 
     private int id;
-    private lista<ItemProduzido> itensProduzidos;
+    private Lista<ItemProduzido> itensProduzidos;
     private Pedido pedido;
 
     public PedidoItensProduzido(int id, Pedido pedido) {
         this.id = id;
         this.pedido = pedido;
-        this.itensProduzidos = new lista<>();
+        this.itensProduzidos = new Lista<>();
     }
 
     public void adicionarItem() {
@@ -36,7 +36,7 @@ public class PedidoItensProduzido {
         return id;
     }
 
-    public lista<ItemProduzido> getItensProduzidos() {
+    public Lista<ItemProduzido> getItensProduzidos() {
         return itensProduzidos;
     }
 

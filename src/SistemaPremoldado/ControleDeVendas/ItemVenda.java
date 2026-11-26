@@ -12,9 +12,7 @@ public class ItemVenda {
     private EstoquePremoldado estoquePremoldado;
     private ItemProduzido itemProduzido;
 
-    public ItemVenda(int quantidade, double precoUnitario,
-                     EstoquePremoldado estoquePremoldado,
-                     ItemProduzido itemProduzido) {
+    public ItemVenda(int quantidade, double precoUnitario,EstoquePremoldado estoquePremoldado, ItemProduzido itemProduzido) {
 
         if (quantidade <= 0 || precoUnitario < 0) {
             throw new IllegalArgumentException("Quantidade ou preço inválido.");
