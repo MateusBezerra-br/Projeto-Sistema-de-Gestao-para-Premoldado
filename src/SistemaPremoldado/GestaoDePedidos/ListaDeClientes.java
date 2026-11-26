@@ -5,9 +5,17 @@ import SistemaPremoldado.EstruturaDeDados.Lista;
 public class ListaDeClientes {
 
     private Lista<Cliente> listaDeClientes;
+    private static ListaDeClientes instancia;
 
-    public ListaDeClientes() {
+    private ListaDeClientes() {
         this.listaDeClientes = new Lista<>();
+    }
+
+    public static ListaDeClientes getInstancia() {
+        if (instancia == null) {
+            instancia = new ListaDeClientes();
+        }
+        return instancia;
     }
 
     public void cadastrarCliente(Cliente cliente) {

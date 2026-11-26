@@ -67,4 +67,8 @@ public class Pedido {
     public Lista<ItemPedido> getItensPedido() {
         return itensPedido;
     }
+
+    public void setPrazoEstimado(String prazoEstimado) {
+        this.prazoEstimado = prazoEstimado;
+    }
 }
