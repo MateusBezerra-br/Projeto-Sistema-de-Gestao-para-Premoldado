@@ -9,7 +9,7 @@ public class ItemTraco {
         this.quantidade = quantidade;
     }
 
-    public void atualizarQuantidade(double quantidade) {
+    public void setQuantidade(double quantidade) {
         this.quantidade = quantidade;
     }
 

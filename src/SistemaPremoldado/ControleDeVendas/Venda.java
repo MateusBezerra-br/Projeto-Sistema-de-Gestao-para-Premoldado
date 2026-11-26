@@ -1,19 +1,19 @@
 
 package SistemaPremoldado.ControleDeVendas;
 
-import SistemaPremoldado.EstruturaDeDados.lista;
+import SistemaPremoldado.EstruturaDeDados.Lista;
 
 public class Venda {
 
     private String dataVenda;
-    private lista<ItemVenda> itensVenda;
+    private Lista<ItemVenda> itensVenda;
     private double valorTotal;
     private String statusDeVenda;
 
     public Venda(String dataVenda, String statusDeVenda) {
         this.dataVenda = dataVenda;
         this.statusDeVenda = statusDeVenda;
-        this.itensVenda = new lista<>();
+        this.itensVenda = new Lista<>();
         this.valorTotal = 0.0;
     }
 
@@ -47,7 +47,7 @@ public class Venda {
         return statusDeVenda;
     }
 
-    public lista<ItemVenda> getItensVenda() {
+    public Lista<ItemVenda> getItensVenda() {
         return itensVenda;
     }
 

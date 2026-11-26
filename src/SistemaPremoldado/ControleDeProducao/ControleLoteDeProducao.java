@@ -2,13 +2,13 @@ package SistemaPremoldado.ControleDeProducao;
 
 import SistemaPremoldado.ControleDeCura.ControleDeProducaoEmCura;
 import SistemaPremoldado.EstoqueDeMoldes.EstoqueMolde;
-import SistemaPremoldado.EstruturaDeDados.lista;
+import SistemaPremoldado.EstruturaDeDados.Lista;
 import SistemaPremoldado.GestaoDePedidos.ItemPedido;
 import SistemaPremoldado.GestaoDePedidos.Pedido;
 
-public class ControleLoteDeProducao extends lista<LoteDeProducao> {
+public class ControleLoteDeProducao extends Lista<LoteDeProducao> {
 
-    lista<ItemProducao> itensProducao =  new lista<>();
+    Lista<ItemProducao> itensProducao =  new Lista<>();
     private EstoqueMolde estoqueMolde;
 
     private static ControleLoteDeProducao instancia;
@@ -58,7 +58,7 @@ public class ControleLoteDeProducao extends lista<LoteDeProducao> {
         }
     }
 
-    public void verificaStausDeMaquinas(){
+    public void verificaStatusDeMaquinas(){
 
 
             ControleDeMaquinas.getIntancia().verificarStatusMaquinas();
@@ -71,6 +71,26 @@ public class ControleLoteDeProducao extends lista<LoteDeProducao> {
         if(loteDeProducao.getMetodoDeProducao() == LoteDeProducao.metodoProducao.VIBROCOMPRESSAO){
 
 
+            verificarDisponibilidadeMetodoVibrocompressao();
+
+
+
+        }
+        else if(loteDeProducao.getMetodoDeProducao() == LoteDeProducao.metodoProducao.SEMISSECO_MANUAL){
+
+
+            verificarDisponibilidadeMetodoManualSemisseco();
+
+
+
+        }
+        else if(loteDeProducao.getMetodoDeProducao() == LoteDeProducao.metodoProducao.CONVENCIONAL){
+
+
+            verificarDisponibilidadeMetodoConvencional();
+
+
+
 
 
         }
@@ -78,6 +98,34 @@ public class ControleLoteDeProducao extends lista<LoteDeProducao> {
 
 
     }
+
+
+    public boolean verificarDisponibilidadeMetodoVibrocompressao(LoteDeProducao loteDeProducao){
+
+
+
+
+        return true;
+    }
+
+
+    public boolean verificarDisponibilidadeMetodoManualSemisseco(LoteDeProducao loteDeProducao){
+
+
+        return true;
+    }
+
+
+    public boolean verificarDisponibilidadeMetodoConvencional(LoteDeProducao loteDeProducao){
+
+
+
+        return true;
+    }
+
+
+
+
 
 
     public void mandarLoteParaEtapaDeCura(LoteDeProducao loteDeProducao) {

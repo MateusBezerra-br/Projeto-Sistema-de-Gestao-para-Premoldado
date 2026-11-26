@@ -26,9 +26,11 @@ public class EstoqueMateriaPrima {
 
     public boolean darBaixa(MateriaPrima materiaPrima, double quantidade) {
         ItemEstoque item = verificarDisponibilidade(materiaPrima);
+
         if (item == null || item.getQuantidadeDisponivel() < quantidade) {
             return false;
         }
+
         double novaQuantidade = item.getQuantidadeDisponivel() - quantidade;
         item.atualizaQuantidade(novaQuantidade);
         return true;

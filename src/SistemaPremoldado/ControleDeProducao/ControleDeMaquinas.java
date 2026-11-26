@@ -4,9 +4,9 @@ import SistemaPremoldado.EstoqueDeMoldes.EstoqueMolde;
 import SistemaPremoldado.EstoqueDeMoldes.ItemMolde;
 import SistemaPremoldado.EstoqueDeMoldes.Molde;
 import SistemaPremoldado.EstruturaDeDados.Node;
-import SistemaPremoldado.EstruturaDeDados.lista;
+import SistemaPremoldado.EstruturaDeDados.Lista;
 
-public class ControleDeMaquinas extends lista<MaquinaVibroCompressora> {
+public class ControleDeMaquinas extends Lista<MaquinaVibroCompressora> {
 
 
     EstoqueMolde  estoqueMolde;

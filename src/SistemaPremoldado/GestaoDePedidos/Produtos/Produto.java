@@ -1,5 +1,7 @@
 package SistemaPremoldado.GestaoDePedidos.Produtos;
 
+import SistemaPremoldado.Estoque.TracoProduto;
+
 public class Produto {
     private int id;
     private String nome;
@@ -9,8 +11,9 @@ public class Produto {
     private double largura;
     private double altura;
     private int tempoCura;
+    private TracoProduto tracoProduto;
 
-    public Produto(int id, String nome, double precoUnidade, String descricao, double comprimento, double largura, double altura, int tempoCura) {
+    public Produto(int id, String nome, double precoUnidade, String descricao, double comprimento, double largura, double altura, int tempoCura,  TracoProduto tracoProduto) {
         this.id = id;
         this.nome = nome;
         this.precoUnidade = precoUnidade;
@@ -19,6 +22,7 @@ public class Produto {
         this.largura = largura;
         this.altura = altura;
         this.tempoCura = tempoCura;
+        this.tracoProduto = tracoProduto;
     }
 
     public void atualizarPreco(double novoPreco) {

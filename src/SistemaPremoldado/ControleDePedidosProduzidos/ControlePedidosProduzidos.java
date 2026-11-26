@@ -1,14 +1,14 @@
 
 package SistemaPremoldado.ControleDePedidosProduzidos;
 
-import SistemaPremoldado.EstruturaDeDados.lista;
+import SistemaPremoldado.EstruturaDeDados.Lista;
 
 public class ControlePedidosProduzidos {
 
-    private lista<PedidoItensProduzido> listaDePedidosProduzidos;
+    private Lista<PedidoItensProduzido> listaDePedidosProduzidos;
 
     public ControlePedidosProduzidos() {
-        this.listaDePedidosProduzidos = new lista<>();
+        this.listaDePedidosProduzidos = new Lista<>();
     }
 
     public void proximoDaLista() {

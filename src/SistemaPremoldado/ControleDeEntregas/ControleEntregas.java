@@ -1,14 +1,14 @@
 
 package SistemaPremoldado.ControleDeEntregas;
 
-import SistemaPremoldado.EstruturaDeDados.lista;
+import SistemaPremoldado.EstruturaDeDados.Lista;
 
 public class ControleEntregas {
 
-    private lista<Entrega> filaDeEntrega;
+    private Lista<Entrega> filaDeEntrega;
 
     public ControleEntregas() {
-        this.filaDeEntrega = new lista<>();
+        this.filaDeEntrega = new Lista<>();
     }
 
     public void adicionarNaFila(Entrega entrega) {
@@ -24,9 +24,9 @@ public class ControleEntregas {
         return (Entrega) filaDeEntrega.procurarData(0);
     }
 
-    public lista<Entrega> listarPorStatus(String status) {
+    public Lista<Entrega> listarPorStatus(String status) {
 
-        lista<Entrega> entregasEncontradas = new lista<>();
+        Lista<Entrega> entregasEncontradas = new Lista<>();
 
         for (int i = 0; i < filaDeEntrega.retornarTamanho(); i++) {
 
@@ -57,7 +57,7 @@ public class ControleEntregas {
         adicionarNaFila(entrega);
     }
 
-    public lista<Entrega> getFilaDeEntrega() {
+    public Lista<Entrega> getFilaDeEntrega() {
         return filaDeEntrega;
     }
 }

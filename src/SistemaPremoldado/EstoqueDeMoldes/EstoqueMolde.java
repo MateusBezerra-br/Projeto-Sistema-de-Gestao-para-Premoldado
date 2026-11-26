@@ -1,10 +1,10 @@
 package SistemaPremoldado.EstoqueDeMoldes;
 
 import SistemaPremoldado.EstruturaDeDados.Node;
-import SistemaPremoldado.EstruturaDeDados.lista;
+import SistemaPremoldado.EstruturaDeDados.Lista;
 
 
-public class EstoqueMolde extends lista<ItemMolde>{
+public class EstoqueMolde extends Lista<ItemMolde>{
 
 
     public void cadastrarMolde (Molde Molde, int quantidadeTotal ) {
@@ -47,7 +47,7 @@ public class EstoqueMolde extends lista<ItemMolde>{
         return !(encontrarMolde(moldeCandidatoCadastro).getMolde() == null);
     }
 
-    public ItemMolde encontrarMolde(Molde moldeCandidatoCadastro) {
+    public ItemMolde encontrarMolde(Molde moldeAlvo) {
 
         Node<ItemMolde> aux = getBegin();
 
@@ -56,7 +56,7 @@ public class EstoqueMolde extends lista<ItemMolde>{
             ItemMolde aux2 = aux.data;
 
 
-            if(caracteristicasMoldeIguais(aux2, moldeCandidatoCadastro) ){
+            if(caracteristicasMoldeIguais(aux2, moldeAlvo) ){
                 return aux2;
             }
 
