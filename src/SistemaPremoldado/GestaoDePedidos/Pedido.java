@@ -16,14 +16,16 @@ public class Pedido {
     private String prazoEstimado;
     private String dataTermino;
     private double valorTotal;
+    private Cliente cliente;
     private Lista<ItemPedido> itensPedido;
 
-    public Pedido(int id, String status, String dataDeChegada, String prazoEstimado, String dataTermino) {
+    public Pedido(int id, String status, String dataDeChegada, String prazoEstimado, String dataTermino, Cliente cliente) {
         this.id = id;
         this.status = status;
         this.dataDeChegada = dataDeChegada;
         this.prazoEstimado = prazoEstimado;
         this.dataTermino = dataTermino;
+        this.cliente = cliente;
         this.valorTotal = 0.0;
         this.itensPedido = new Lista<>();
     }
@@ -46,6 +48,9 @@ public class Pedido {
         }
     }
 
+    public Cliente getCliente() {
+        return cliente;
+    }
 
     public int getId() {
         return id;
