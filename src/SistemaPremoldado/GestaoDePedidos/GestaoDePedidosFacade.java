@@ -20,8 +20,8 @@ public class GestaoDePedidosFacade {
         return listaDeClientes.consultarCliente(index);
     }
 
-    public void cadastrarPedido(int id, String status, String dataDeChegada, String prazoEstimado, String dataTermino) {
-        Pedido pedido = new Pedido(id, status, dataDeChegada, prazoEstimado, dataTermino);
+    public void cadastrarPedido(int id, String status, String dataDeChegada, String prazoEstimado, String dataTermino, Cliente cliente) {
+        Pedido pedido = new Pedido(id, status, dataDeChegada, prazoEstimado, dataTermino, cliente);
         listaDePedidos.adicionarPedido(pedido);
     }
 
