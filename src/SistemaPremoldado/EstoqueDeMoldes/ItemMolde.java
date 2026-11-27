@@ -4,13 +4,13 @@ public class ItemMolde {
 
     private Molde molde;
     private int  quantidadeTotal;
-    private int quantidadeDisponivel = 0;
+    private int quantidadeDisponivel ;
     private int quantidadeEmUso = 0;
 
     public ItemMolde(Molde molde, int quantidadeTotal) {
         this.molde = molde;
         this.quantidadeTotal = quantidadeTotal;
-
+        this.quantidadeDisponivel = quantidadeTotal;
     }
 
     public Molde getMolde() {
@@ -38,28 +38,20 @@ public class ItemMolde {
     }
 
 
-    public void retirarMoldes( int quantidadeOcupar){
-
-        if(quantidadeTotal ==  (quantidadeEmUso + quantidadeOcupar) + (quantidadeDisponivel - quantidadeEmUso) ){
-
+    public void retirarMoldes(int quantidadeOcupar) {
+        if (quantidadeOcupar > 0 && quantidadeDisponivel >= quantidadeOcupar) {
             quantidadeEmUso += quantidadeOcupar;
             quantidadeDisponivel -= quantidadeOcupar;
-
         }
-
     }
 
-    public  void devolverMoldes(int quantidadeDesocupar){
-
-
-        if(quantidadeTotal ==  (quantidadeDisponivel + quantidadeDesocupar) + (quantidadeEmUso - quantidadeDesocupar) ){
-
+    public void devolverMoldes(int quantidadeDesocupar) {
+        if (quantidadeDesocupar > 0 && quantidadeEmUso >= quantidadeDesocupar) {
             quantidadeDisponivel += quantidadeDesocupar;
             quantidadeEmUso -= quantidadeDesocupar;
-
         }
-
     }
+
 
 
 }

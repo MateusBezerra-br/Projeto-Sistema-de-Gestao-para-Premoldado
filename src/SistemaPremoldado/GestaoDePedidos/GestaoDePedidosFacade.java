@@ -55,4 +55,10 @@ public class GestaoDePedidosFacade {
     public void removerItemDoPedido(Pedido pedido, int index) {
         pedido.removerItem(index);
     }
+
+    public void mandarPedidoParaEtapaProducao(Pedido  pedido) {
+
+        ListaDePedidos.getInstancia().mandarPedidoParaProducao(pedido);
+
+    }
 }

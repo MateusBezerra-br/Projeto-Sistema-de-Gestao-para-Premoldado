@@ -94,11 +94,11 @@ public class EstoqueMolde extends Lista<ItemMolde>{
 
     }
 
-    public boolean verificarDisponibilidade(Molde moldeVerificar, int quantidadeSolicitada){
+    public boolean verificarDisponibilidade(Molde molde, int quantidadeSolicitada) {
 
+        ItemMolde item = encontrarMolde(molde);
 
-      return  encontrarMolde(moldeVerificar).getQuantidadeDisponivel() == quantidadeSolicitada;
-
+        return item != null && quantidadeSolicitada > 0 && item.getQuantidadeDisponivel() >= quantidadeSolicitada;
     }
 
 

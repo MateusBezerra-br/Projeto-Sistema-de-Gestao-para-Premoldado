@@ -1,7 +1,10 @@
 package SistemaPremoldado.ControleDeProducao;
 
 import SistemaPremoldado.ControleDeCura.ControleDeProducaoEmCura;
+import SistemaPremoldado.Estoque.EstoqueMateriaPrima;
 import SistemaPremoldado.EstoqueDeMoldes.EstoqueMolde;
+import SistemaPremoldado.EstoqueDeMoldes.ItemMolde;
+import SistemaPremoldado.EstoqueDeMoldes.Molde;
 import SistemaPremoldado.EstruturaDeDados.Lista;
 import SistemaPremoldado.GestaoDePedidos.ItemPedido;
 import SistemaPremoldado.GestaoDePedidos.Pedido;
@@ -12,7 +15,6 @@ public class ControleLoteDeProducao extends Lista<LoteDeProducao> {
     private EstoqueMolde estoqueMolde;
 
     private static ControleLoteDeProducao instancia;
-
 
     private ControleLoteDeProducao() {
 
@@ -53,86 +55,237 @@ public class ControleLoteDeProducao extends Lista<LoteDeProducao> {
 
         for(int i = 0; i < getInstancia().itensProducao.retornarTamanho();i++){
 
-            System.out.println( getInstancia().itensProducao.procurarData(i).toString());
+            System.out.println( getInstancia().itensProducao.procurarData(i));
 
         }
     }
 
-    public void verificaStatusDeMaquinas(){
+    public void consultarStatusDeMaquinas(){
 
 
             ControleDeMaquinas.getIntancia().verificarStatusMaquinas();
 
     }
 
-    public void iniciarProducao(LoteDeProducao loteDeProducao) {
 
-        String pendencias = "";
 
-        if (loteDeProducao.getMetodoDeProducao() == LoteDeProducao.metodoProducao.VIBROCOMPRESSAO) {
 
-            pendencias = verificarDisponibilidadeMetodoVibrocompressao(loteDeProducao);
 
-        } else if (loteDeProducao.getMetodoDeProducao() == LoteDeProducao.metodoProducao.SEMISSECO_MANUAL) {
+    public void iniciarProducao(LoteDeProducao lote) {
 
-            pendencias = verificarDisponibilidadeMetodoManualSemisseco(loteDeProducao);
-
-        } else if (loteDeProducao.getMetodoDeProducao() == LoteDeProducao.metodoProducao.CONVENCIONAL) {
-
-            pendencias = verificarDisponibilidadeMetodoConvencional(loteDeProducao);
-
-        }
-
-        if (!pendencias.isEmpty()) {
-            System.out.println("Não foi possível iniciar a produção:");
-            System.out.println(pendencias);
+        if (lote == null) {
+            System.out.println("Lote inválido.");
             return;
         }
 
-        System.out.println("Produção iniciada!");
+        String problemas = "";
 
+        if (lote.getStatusAtual() != LoteDeProducao.statusAtuais.AGUARDANDO_INICIIO_PRODUCAO) {
+            System.out.println("O lote não está aguardando o início da produção.");
+            return;
+        }
+
+        if (lote.getMetodoDeProducao() == LoteDeProducao.metodoProducao.CONVENCIONAL) {
+
+            problemas += verificarMoldesConvencionais(lote);
+
+        } else if (lote.getMetodoDeProducao() == LoteDeProducao.metodoProducao.SEMISSECO_MANUAL) {
+
+            problemas += verificarMoldesSemisseco(lote);
+
+        } else if (lote.getMetodoDeProducao() == LoteDeProducao.metodoProducao.VIBROCOMPRESSAO) {
+
+            problemas += verificarMaquinaVibrocompressao(lote);
+
+        }
+
+        problemas += EstoqueMateriaPrima.getInstancia().verificarMateriaPrima(lote);
+
+        if (!problemas.isEmpty()) {
+            System.out.println("Não foi possível iniciar a produção:");
+            System.out.println(problemas);
+            return;
+        }
+
+        reservarRecursos(lote);
+
+        lote.iniciarProducao();
+
+        System.out.println("Produção iniciada com sucesso!");
     }
 
 
-    public String verificarDisponibilidadeMetodoVibrocompressao(LoteDeProducao loteDeProducao) {
+    private String verificarMaquinaVibrocompressao(LoteDeProducao lote) {
 
-        return ControleDeMaquinas.getIntancia().verificarDisponibilidadePara(loteDeProducao);
+        MaquinaVibroCompressora maquina =
+                ControleDeMaquinas.getIntancia().encontrarMaquinaDisponivelPara(lote);
 
+        if (maquina == null) {
+            return "- Não existe máquina liberada com molde de vibrocompressão compatível.\n";
+        }
+
+        return "";
+    }
+
+    private String verificarMoldesConvencionais(LoteDeProducao lote) {
+
+        if (estoqueMolde == null) {
+            return "- Estoque de moldes não foi definido.\n";
+        }
+
+        for (int i = 0; i < estoqueMolde.retornarTamanho(); i++) {
+
+            ItemMolde item = (ItemMolde) estoqueMolde.procurarData(i);
+            Molde molde = item.getMolde();
+
+            if (molde.getTipoDeMolde() == Molde.TipoDeMolde.moldeFixo
+                    && molde.getProduto().getId() == lote.getProduto().getId()) {
+
+                if (molde.getCapacidade() <= 0) {
+                    continue;
+                }
+
+                int necessario = (int) Math.ceil(
+                        (double) lote.getQuantidade() / molde.getCapacidade()
+                );
+
+                if (item.getQuantidadeDisponivel() >= necessario) {
+                    return "";
+                }
+
+                return "- Moldes convencionais insuficientes. Necessários: "
+                        + necessario + "; disponíveis: "
+                        + item.getQuantidadeDisponivel() + ".\n";
+            }
+        }
+
+        return "- Não existe molde fixo cadastrado para esse produto.\n";
     }
 
 
-    public String verificarDisponibilidadeMetodoManualSemisseco(LoteDeProducao loteDeProducao) {
+    private String verificarMoldesSemisseco(LoteDeProducao lote) {
 
-        String pendencias = "";
+        if (estoqueMolde == null) {
+            return "- Estoque de moldes não foi definido.\n";
+        }
 
-        // Verificação de moldes será adicionada aqui.
+        for (int i = 0; i < estoqueMolde.retornarTamanho(); i++) {
 
-        return pendencias;
+            ItemMolde item = (ItemMolde) estoqueMolde.procurarData(i);
+            Molde molde = item.getMolde();
+
+            if (molde.getTipoDeMolde() == Molde.TipoDeMolde.moldeDesemissecoManual
+                    && molde.getProduto().getId() == lote.getProduto().getId()) {
+
+                if (item.getQuantidadeDisponivel() >= 1) {
+                    return "";
+                }
+
+                return "- Não há moldes semisseco disponíveis.\n";
+            }
+        }
+
+        return "- Não existe molde semisseco cadastrado para esse produto.\n";
     }
 
 
-    public String verificarDisponibilidadeMetodoConvencional(LoteDeProducao loteDeProducao) {
 
-        String pendencias = "";
 
-        // Verificação de moldes será adicionada aqui.
 
-        return pendencias;
+
+
+    private void reservarRecursos(LoteDeProducao lote) {
+
+        if (lote.getMetodoDeProducao() == LoteDeProducao.metodoProducao.CONVENCIONAL) {
+
+            for (int i = 0; i < estoqueMolde.retornarTamanho(); i++) {
+
+                ItemMolde item = (ItemMolde) estoqueMolde.procurarData(i);
+                Molde molde = item.getMolde();
+
+                if (molde.getTipoDeMolde() == Molde.TipoDeMolde.moldeFixo
+                        && molde.getProduto().getId() == lote.getProduto().getId()) {
+
+                    int quantidade = (int) Math.ceil(
+                            (double) lote.getQuantidade() / molde.getCapacidade()
+                    );
+
+                    item.retirarMoldes(quantidade);
+                    lote.setMoldeOcupado(molde);
+                    break;
+                }
+            }
+
+        } else if (lote.getMetodoDeProducao() == LoteDeProducao.metodoProducao.SEMISSECO_MANUAL) {
+
+            for (int i = 0; i < estoqueMolde.retornarTamanho(); i++) {
+
+                ItemMolde item = (ItemMolde) estoqueMolde.procurarData(i);
+                Molde molde = item.getMolde();
+
+                if (molde.getTipoDeMolde() == Molde.TipoDeMolde.moldeDesemissecoManual
+                        && molde.getProduto().getId() == lote.getProduto().getId()) {
+
+                    item.retirarMoldes(1);
+                    lote.setMoldeOcupado(molde);
+                    break;
+                }
+            }
+
+        } else if (lote.getMetodoDeProducao() == LoteDeProducao.metodoProducao.VIBROCOMPRESSAO) {
+
+            MaquinaVibroCompressora maquina =
+                    ControleDeMaquinas.getIntancia().encontrarMaquinaDisponivelPara(lote);
+
+            if (maquina != null) {
+                maquina.setLoteAtribuido(lote);
+                maquina.setStatusDeFuncionamento(
+                        MaquinaVibroCompressora.statusFuncionamento.MAQUINA_OCUPADA
+                );
+
+                lote.setMaquinaVibroCompressora(maquina);
+            }
+        }
+
+        EstoqueMateriaPrima.getInstancia().darBaixaMateriaPrima(lote);
     }
-
-
-
-
-
 
     public void mandarLoteParaEtapaDeCura(LoteDeProducao loteDeProducao) {
 
+        if (loteDeProducao == null) {
+            return;
+        }
 
-        loteDeProducao.setStatusAtual(LoteDeProducao.statusAtuais.PASSOU_PARA_ETAPA_CURA);
-        ControleDeProducaoEmCura.getInstancia().adicionarNovoLoteEmCura(loteDeProducao);
+        if (loteDeProducao.getMetodoDeProducao()
+                == LoteDeProducao.metodoProducao.SEMISSECO_MANUAL) {
 
+            estoqueMolde.devolverMoldes(loteDeProducao.getMoldeOcupado(), 1);
 
+        } else if (loteDeProducao.getMetodoDeProducao()
+                == LoteDeProducao.metodoProducao.VIBROCOMPRESSAO) {
+
+            MaquinaVibroCompressora maquina =
+                    loteDeProducao.getMaquinaVibroCompressora();
+
+            if (maquina != null) {
+                maquina.setStatusDeFuncionamento(
+                        MaquinaVibroCompressora.statusFuncionamento.MAQUINA_LIBERADA
+                );
+
+                maquina.setLoteAtribuido(null);
+                loteDeProducao.setMaquinaVibroCompressora(null);
+            }
+        }
+
+        loteDeProducao.finalizarProducao();
+
+        ControleDeProducaoEmCura.getInstancia()
+                .adicionarNovoLoteEmCura(loteDeProducao);
     }
 
+
+    public void setEstoqueMolde(EstoqueMolde estoqueMolde) {
+        this.estoqueMolde = estoqueMolde;
+    }
 
 }

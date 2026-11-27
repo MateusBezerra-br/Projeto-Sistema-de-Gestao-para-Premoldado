@@ -34,6 +34,7 @@ public class LoteDeProducao {
     }
 
     int id;
+    private int quantidadeMoldesOcupados;
     private EstoqueMolde estoqueMolde;
     private Molde moldeOcupado;
     private Produto produto;
@@ -116,6 +117,14 @@ public class LoteDeProducao {
 
     public void setEstoqueMolde(EstoqueMolde estoqueMolde) {
         this.estoqueMolde = estoqueMolde;
+    }
+
+    public int getQuantidadeMoldesOcupados() {
+        return quantidadeMoldesOcupados;
+    }
+
+    public void setQuantidadeMoldesOcupados(int quantidadeMoldesOcupados) {
+        this.quantidadeMoldesOcupados = quantidadeMoldesOcupados;
     }
 
     @Override

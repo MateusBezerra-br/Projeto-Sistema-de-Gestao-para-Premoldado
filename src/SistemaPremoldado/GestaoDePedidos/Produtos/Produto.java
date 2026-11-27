@@ -60,4 +60,12 @@ public class Produto {
     public int getTempoCura() {
         return tempoCura;
     }
+
+    public TracoProduto getTracoProduto() {
+        return tracoProduto;
+    }
+
+    public void setTracoProduto(TracoProduto tracoProduto) {
+        this.tracoProduto = tracoProduto;
+    }
 }

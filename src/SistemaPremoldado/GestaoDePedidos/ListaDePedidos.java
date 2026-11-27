@@ -1,5 +1,6 @@
 package SistemaPremoldado.GestaoDePedidos;
 
+import SistemaPremoldado.ControleDeProducao.ControleLoteDeProducao;
 import SistemaPremoldado.EstruturaDeDados.Lista;
 
 
@@ -56,5 +57,12 @@ public class ListaDePedidos {
         }
 
         return (Pedido) listaDePedidos.procurarData(indiceAtual);
+    }
+
+    public void mandarPedidoParaProducao(Pedido pedido) {
+
+        ControleLoteDeProducao.getInstancia()
+                .mandarPedidoParaEtapaProducao(pedido);
+
     }
 }

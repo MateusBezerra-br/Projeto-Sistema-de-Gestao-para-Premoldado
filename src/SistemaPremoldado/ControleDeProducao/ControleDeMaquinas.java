@@ -165,4 +165,26 @@ public class ControleDeMaquinas extends Lista<MaquinaVibroCompressora> {
     public void setEstoqueMolde(EstoqueMolde estoqueMolde) {
         this.estoqueMolde = estoqueMolde;
     }
+
+    public MaquinaVibroCompressora encontrarMaquinaDisponivelPara(LoteDeProducao lote) {
+
+        for (int i = 0; i < retornarTamanho(); i++) {
+
+            MaquinaVibroCompressora maquina =
+                    (MaquinaVibroCompressora) procurarData(i);
+
+            if (maquina.getStatusDeFuncionamento()
+                    == MaquinaVibroCompressora.statusFuncionamento.MAQUINA_LIBERADA
+                    && maquina.getMoldeInstalado() != null
+                    && maquina.getMoldeInstalado().getTipoDeMolde()
+                    == Molde.TipoDeMolde.moldeParaVibroCompressao
+                    && maquina.getMoldeInstalado().getProduto().getId()
+                    == lote.getProduto().getId()) {
+
+                return maquina;
+            }
+        }
+
+        return null;
+    }
 }
