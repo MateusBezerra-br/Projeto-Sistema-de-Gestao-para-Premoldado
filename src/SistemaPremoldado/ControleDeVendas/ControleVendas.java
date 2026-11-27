@@ -95,7 +95,7 @@ public class ControleVendas {
         
         vendas.addData(venda);
 
-        // Marca as unidades como vendidas
+        
         for (int i = 0; i < itensSelecionados.retornarTamanho(); i++) {
 
             ItemProduzido item = (ItemProduzido)
@@ -123,7 +123,7 @@ public class ControleVendas {
         return (Venda) vendas.procurarData(indice);
     }
 
-    // Retorna todas as vendas
+    
     public Lista<Venda> getVendas() {
         return vendas;
     }

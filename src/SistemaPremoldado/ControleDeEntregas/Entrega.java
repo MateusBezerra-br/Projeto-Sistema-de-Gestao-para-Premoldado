@@ -14,19 +14,46 @@ public class Entrega {
     public Entrega(String nomeEntregador, StatusEntrega statusEntrega,
                    String dataPrevistaEntrega, Venda venda) {
 
+        if (venda == null) {
+            throw new IllegalArgumentException(
+                "A venda não pode ser nula."
+            );
+        }
+
         this.nomeEntregador = nomeEntregador;
         this.statusEntrega = statusEntrega;
         this.dataPrevistaEntrega = dataPrevistaEntrega;
-        this.venda = venda;
         this.itensEntrega = new Lista<>();
+
+        this.venda = null;
+        venda.associarEntrega(this);
     }
 
     public void atualizarStatusEntrega(StatusEntrega novoStatus) {
         if (novoStatus == null) {
-            throw new IllegalArgumentException("O status não pode ser nulo.");
+            throw new IllegalArgumentException(
+                "O status não pode ser nulo."
+            );
         }
 
         this.statusEntrega = novoStatus;
+    }
+
+    public void adicionarItemEntrega(ItemEntrega item) {
+        if (item == null) {
+            throw new IllegalArgumentException(
+                "O item de entrega não pode ser nulo."
+            );
+        }
+
+        if (item.getEntrega() != null && item.getEntrega() != this) {
+            throw new IllegalStateException(
+                "O item já pertence a outra entrega."
+            );
+        }
+
+        item.setEntrega(this);
+        itensEntrega.addData(item);
     }
 
     public void calcularPrevisao() {
@@ -58,7 +85,7 @@ public class Entrega {
     }
 
     public void setStatusEntrega(StatusEntrega statusEntrega) {
-        this.statusEntrega = statusEntrega;
+        atualizarStatusEntrega(statusEntrega);
     }
 
     public void setDataPrevistaEntrega(String dataPrevistaEntrega) {
@@ -66,6 +93,18 @@ public class Entrega {
     }
 
     public void setVenda(Venda venda) {
+        if (venda == null) {
+            throw new IllegalArgumentException(
+                "A venda não pode ser nula."
+            );
+        }
+
+        if (this.venda != null && this.venda != venda) {
+            throw new IllegalStateException(
+                "Esta entrega já está associada a outra venda."
+            );
+        }
+
         this.venda = venda;
     }
 }
