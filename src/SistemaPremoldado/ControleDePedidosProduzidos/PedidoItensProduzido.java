@@ -73,11 +73,7 @@ public class PedidoItensProduzido {
         );
     }
 
-    public Venda venderItem(
-            ItemProduzido item,
-            ControleVendas controle,
-            EstoquePremoldado estoque,
-            String dataVenda) {
+    public Venda venderItem(ItemProduzido item, ControleVendas controle, EstoquePremoldado estoque, String dataVenda) {
 
         if (controle == null || estoque == null) {
             throw new IllegalArgumentException(
@@ -94,18 +90,11 @@ public class PedidoItensProduzido {
         Lista<ItemProduzido> selecionados = new Lista<>();
         selecionados.addData(item);
 
-        return controle.criarVenda(
-            selecionados,
-            estoque,
-            dataVenda
+        return controle.criarVenda(selecionados, estoque, dataVenda
         );
     }
 
-    public Venda venderPedidoItensProduzido(
-            Lista<ItemProduzido> selecionados,
-            ControleVendas controle,
-            EstoquePremoldado estoque,
-            String dataVenda) {
+    public Venda venderPedidoItensProduzido(Lista<ItemProduzido> selecionados, ControleVendas controle, EstoquePremoldado estoque, String dataVenda) {
 
         if (selecionados == null ||
             selecionados.retornarTamanho() == 0) {

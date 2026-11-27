@@ -19,11 +19,7 @@ public class ItemProduzido {
 
     private boolean vendido = false;
 
-    public ItemProduzido(int id, int quantidade, String dataProduzido,
-                         ItemPremoldado itemPremoldado,
-                         Produto produto,
-                         LoteEmCura loteEmCura,
-                         PedidoItensProduzido pedidoItensProduzido) {
+    public ItemProduzido(int id, int quantidade, String dataProduzido, ItemPremoldado itemPremoldado, Produto produto, LoteEmCura loteEmCura, PedidoItensProduzido pedidoItensProduzido) {
 
         if (id <= 0 || quantidade != 1) {
             throw new IllegalArgumentException(

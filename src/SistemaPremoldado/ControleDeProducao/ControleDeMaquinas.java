@@ -111,6 +111,42 @@ public class ControleDeMaquinas extends Lista<MaquinaVibroCompressora> {
 
     }
 
+    public String verificarDisponibilidadePara(LoteDeProducao loteDeProducao) {
+
+        if (retornarTamanho() == 0) {
+            return "- Não existem máquinas cadastradas.";
+        }
+
+        boolean existeMaquinaLiberada = false;
+
+        for (int i = 0; i < retornarTamanho(); i++) {
+
+            MaquinaVibroCompressora maquina =
+                    (MaquinaVibroCompressora) procurarData(i);
+
+            if (maquina.getStatusDeFuncionamento()
+                    != MaquinaVibroCompressora.statusFuncionamento.MAQUINA_LIBERADA) {
+                continue;
+            }
+
+            existeMaquinaLiberada = true;
+
+            if (maquina.getMoldeInstalado() != null &&
+                    maquina.getMoldeInstalado().getProduto()
+                            .equals(loteDeProducao.getProduto())) {
+
+                return "";
+            }
+        }
+
+        if (!existeMaquinaLiberada) {
+            return "- Não existe máquina liberada.";
+        }
+
+        return "- Não existe máquina liberada com molde compatível.";
+    }
+
+
     public void liberarMaquinaEmUmLote(String nome){
 
 

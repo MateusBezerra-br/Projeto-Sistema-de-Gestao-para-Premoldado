@@ -13,10 +13,7 @@ public class ControleVendas {
     }
 
     
-    public Venda criarVenda(
-            Lista<ItemProduzido> itensSelecionados,
-            EstoquePremoldado estoque,
-            String dataVenda) {
+    public Venda criarVenda(Lista<ItemProduzido> itensSelecionados, EstoquePremoldado estoque, String dataVenda) {
 
         if (itensSelecionados == null ||
             itensSelecionados.retornarTamanho() == 0) {

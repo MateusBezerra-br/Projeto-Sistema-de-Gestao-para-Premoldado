@@ -5,7 +5,6 @@ import SistemaPremoldado.GestaoDePedidos.Produtos.Produto;
 import SistemaPremoldado.ControleDeVendas.ItemVenda;
 import SistemaPremoldado.ControleDePedidosProduzidos.ItemProduzido;
 import SistemaPremoldado.ControleDePedidosProduzidos.PedidoItensProduzido;
-import SistemaPremoldado.EstruturaDeDados.Lista;
 
 public class EstoquePremoldado {
 
@@ -103,12 +102,7 @@ public class EstoquePremoldado {
     }
 
 
-    public void destinarAoPedido(
-            int idItem,
-            int quantidade,
-            Produto produto,
-            PedidoItensProduzido pedido,
-            String dataProduzido) {
+    public void destinarAoPedido(int idItem, int quantidade, Produto produto, PedidoItensProduzido pedido, String dataProduzido) {
 
         if (quantidade <= 0) {
             throw new IllegalArgumentException(
@@ -145,15 +139,7 @@ public class EstoquePremoldado {
 
         for (int i = 0; i < quantidade; i++) {
 
-            ItemProduzido produzido = new ItemProduzido(
-                proximoIdItemProduzido++,
-                1,
-                dataProduzido,
-                item,
-                produto,
-                null,
-                pedido
-            );
+            ItemProduzido produzido = new ItemProduzido(proximoIdItemProduzido++, 1, dataProduzido, item, produto, null, pedido);
 
             pedido.adicionarItem(produzido);
         }

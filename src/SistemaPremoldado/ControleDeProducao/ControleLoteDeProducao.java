@@ -65,64 +65,59 @@ public class ControleLoteDeProducao extends Lista<LoteDeProducao> {
 
     }
 
-    public void iniciarProducao (LoteDeProducao loteDeProducao) {
+    public void iniciarProducao(LoteDeProducao loteDeProducao) {
 
+        String pendencias = "";
 
-        if(loteDeProducao.getMetodoDeProducao() == LoteDeProducao.metodoProducao.VIBROCOMPRESSAO){
+        if (loteDeProducao.getMetodoDeProducao() == LoteDeProducao.metodoProducao.VIBROCOMPRESSAO) {
 
+            pendencias = verificarDisponibilidadeMetodoVibrocompressao(loteDeProducao);
 
-            verificarDisponibilidadeMetodoVibrocompressao();
+        } else if (loteDeProducao.getMetodoDeProducao() == LoteDeProducao.metodoProducao.SEMISSECO_MANUAL) {
 
+            pendencias = verificarDisponibilidadeMetodoManualSemisseco(loteDeProducao);
 
+        } else if (loteDeProducao.getMetodoDeProducao() == LoteDeProducao.metodoProducao.CONVENCIONAL) {
 
-        }
-        else if(loteDeProducao.getMetodoDeProducao() == LoteDeProducao.metodoProducao.SEMISSECO_MANUAL){
-
-
-            verificarDisponibilidadeMetodoManualSemisseco();
-
-
-
-        }
-        else if(loteDeProducao.getMetodoDeProducao() == LoteDeProducao.metodoProducao.CONVENCIONAL){
-
-
-            verificarDisponibilidadeMetodoConvencional();
-
-
-
-
+            pendencias = verificarDisponibilidadeMetodoConvencional(loteDeProducao);
 
         }
 
+        if (!pendencias.isEmpty()) {
+            System.out.println("Não foi possível iniciar a produção:");
+            System.out.println(pendencias);
+            return;
+        }
 
+        System.out.println("Produção iniciada!");
 
     }
 
 
-    public boolean verificarDisponibilidadeMetodoVibrocompressao(LoteDeProducao loteDeProducao){
+    public String verificarDisponibilidadeMetodoVibrocompressao(LoteDeProducao loteDeProducao) {
 
+        return ControleDeMaquinas.getIntancia().verificarDisponibilidadePara(loteDeProducao);
 
-
-
-
-        return true;
     }
 
 
-    public boolean verificarDisponibilidadeMetodoManualSemisseco(LoteDeProducao loteDeProducao){
+    public String verificarDisponibilidadeMetodoManualSemisseco(LoteDeProducao loteDeProducao) {
 
+        String pendencias = "";
 
-        return true;
+        // Verificação de moldes será adicionada aqui.
+
+        return pendencias;
     }
 
 
-    public boolean verificarDisponibilidadeMetodoConvencional(LoteDeProducao loteDeProducao){
+    public String verificarDisponibilidadeMetodoConvencional(LoteDeProducao loteDeProducao) {
 
+        String pendencias = "";
 
+        // Verificação de moldes será adicionada aqui.
 
-
-        return true;
+        return pendencias;
     }
 
 

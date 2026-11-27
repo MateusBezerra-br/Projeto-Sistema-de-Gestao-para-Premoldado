@@ -1,11 +1,14 @@
 package SistemaPremoldado.EstoqueDePremoldados;
 
+import SistemaPremoldado.GestaoDePedidos.Produtos.Produto;
+
 public class ItemPremoldado {
 
     private int id;
     private int quantidade;
+    private Produto Produto;
 
-    public ItemPremoldado(int id, int quantidade) {
+    public ItemPremoldado(int id, int quantidade,  Produto produto) {
 
         if (id <= 0 || quantidade < 0) {
             throw new IllegalArgumentException("ID ou quantidade inválida.");
@@ -13,6 +16,7 @@ public class ItemPremoldado {
 
         this.id = id;
         this.quantidade = quantidade;
+        this.Produto = produto;
     }
 
     public void atualizarQuant(int novaQuantidade) {
@@ -48,5 +52,13 @@ public class ItemPremoldado {
         }
 
         this.quantidade = quantidade;
+    }
+
+    public Produto getProduto() {
+        return Produto;
+    }
+
+    public void setProduto(Produto produto) {
+        Produto = produto;
     }
 }
