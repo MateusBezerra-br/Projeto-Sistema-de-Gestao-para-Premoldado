@@ -17,8 +17,8 @@ public class CuraPosSemiSeco extends LoteEmCura {
                 status == statusCura.CANCELADO;
     }
 
-    public CuraPosSemiSeco( Produto produto, int quantidade) {
-        super(produto, quantidade);
+    public CuraPosSemiSeco( Produto produto, int quantidade, int quantidadeParaEstoque) {
+        super(produto, quantidade, quantidadeParaEstoque);
     }
 
 

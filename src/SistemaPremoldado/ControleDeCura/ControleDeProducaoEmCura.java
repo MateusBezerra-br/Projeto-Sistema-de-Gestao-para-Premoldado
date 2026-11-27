@@ -41,7 +41,7 @@ public class ControleDeProducaoEmCura extends Lista<LoteEmCura> {
 
         if(loteEtapaCura.getMetodoDeProducao() == LoteDeProducao.metodoProducao.CONVENCIONAL){
 
-            novoLoteCura = new CuraPosConvencional(loteEtapaCura.getProduto(), loteEtapaCura.getQuantidade(),LocalDate.now().plusDays(loteEtapaCura.getProduto().getTempoCura()) , loteEtapaCura.getMoldeOcupado() ,loteEtapaCura.getEstoqueMolde() );
+            novoLoteCura = new CuraPosConvencional(loteEtapaCura.getProduto(), loteEtapaCura.getQuantidade(),LocalDate.now().plusDays(loteEtapaCura.getProduto().getTempoCura()) , loteEtapaCura.getMoldeOcupado() ,loteEtapaCura.getEstoqueMolde(), loteEtapaCura.getProducaoParaEstoque() );
 
 
 
@@ -50,7 +50,7 @@ public class ControleDeProducaoEmCura extends Lista<LoteEmCura> {
         else {
 
 
-             novoLoteCura = new CuraPosSemiSeco(loteEtapaCura.getProduto(),loteEtapaCura.getQuantidade());
+             novoLoteCura = new CuraPosSemiSeco(loteEtapaCura.getProduto(),loteEtapaCura.getQuantidade(), loteEtapaCura.getProducaoParaEstoque());
 
 
         }
@@ -104,6 +104,11 @@ public class ControleDeProducaoEmCura extends Lista<LoteEmCura> {
     }
 
     public void armazenarLoteEmCuraFinalizado(LoteEmCura LoteFinalizado ){
+
+
+        if( LoteFinalizado.getQuantidadeParaEstoque() > 0){
+
+        }
 
 
 

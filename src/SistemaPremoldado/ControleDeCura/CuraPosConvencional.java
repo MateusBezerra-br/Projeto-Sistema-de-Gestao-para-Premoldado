@@ -17,8 +17,8 @@ public class CuraPosConvencional extends LoteEmCura{
     private LocalDate dataDeDesmolde;
 
 
-    public CuraPosConvencional( Produto produto , int quantidade,  LocalDate dataDeDesmoldePrevisto, Molde moldeOcupado, EstoqueMolde estoqueMolde) {
-        super( produto, quantidade);
+    public CuraPosConvencional( Produto produto , int quantidade,  LocalDate dataDeDesmoldePrevisto, Molde moldeOcupado, EstoqueMolde estoqueMolde, int quantidadeParaEstoque) {
+        super( produto, quantidade,quantidadeParaEstoque);
 
         this.dataDeDesmoldePrevisto = dataDeDesmoldePrevisto;
         this.moldeOcupado = moldeOcupado;

@@ -127,6 +127,14 @@ public class LoteDeProducao {
         this.quantidadeMoldesOcupados = quantidadeMoldesOcupados;
     }
 
+    public int getProducaoParaEstoque() {
+        return producaoParaEstoque;
+    }
+
+    public void setProducaoParaEstoque(int producaoParaEstoque) {
+        this.producaoParaEstoque = producaoParaEstoque;
+    }
+
     @Override
     public String toString(){
         return this.id + "" + this.produto  ;

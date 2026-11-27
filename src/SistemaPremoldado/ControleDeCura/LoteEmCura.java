@@ -34,14 +34,16 @@ public abstract class LoteEmCura {
    private LocalDate dataDeCuraFinalizada;
    private statusCura statusDeCura;
    private Boolean curaAtrasada =  Boolean.FALSE;
+   private int quantidadeParaEstoque;
 
-   public LoteEmCura(Produto produto, int quantidade) {
+   public LoteEmCura(Produto produto, int quantidade, int quantidadeParaEstoque) {
 
        this.produto = produto;
        this.id = id;
        this.quantidade = quantidade;
        this.dataIncioDeCura = LocalDate.now();
        this.dataFinalizacaoDeCuraPrevista = LocalDate.now().plusDays(produto.getTempoCura());
+       this.quantidadeParaEstoque = quantidadeParaEstoque;
 
    }
 
@@ -92,6 +94,13 @@ public abstract class LoteEmCura {
         this.clientes = clientes;
     }
 
+    public int getQuantidadeParaEstoque() {
+        return quantidadeParaEstoque;
+    }
+
+    public void setQuantidadeParaEstoque(int quantidadeParaEstoque) {
+        this.quantidadeParaEstoque = quantidadeParaEstoque;
+    }
 
     @Override
     public String toString() {

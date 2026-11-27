@@ -17,8 +17,7 @@ public class ControleDePedidosProduzidos {
             );
         }
 
-        PedidoItensProduzido primeiro =
-            (PedidoItensProduzido) listaDePedidosProduzidos.procurarData(0);
+        PedidoItensProduzido primeiro = (PedidoItensProduzido) listaDePedidosProduzidos.procurarData(0);
 
         listaDePedidosProduzidos.removeData(0);
         listaDePedidosProduzidos.addData(primeiro);
@@ -34,8 +33,7 @@ public class ControleDePedidosProduzidos {
         listaDePedidosProduzidos.removeData(0);
     }
 
-    public void adicionarNovoItemPedidoProduzido(
-            PedidoItensProduzido pedidoItensProduzido) {
+    public void adicionarNovoItemPedidoProduzido(PedidoItensProduzido pedidoItensProduzido) {
 
         if (pedidoItensProduzido == null) {
             throw new IllegalArgumentException(
